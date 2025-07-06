@@ -1,0 +1,104 @@
+🧠 TWMS-SIM Context Dump
+
+🧩 Architecture
+
+Node.js simulation engine using ws WebSocket server on port 3000
+
+Modular components: CPL, SLH, ANBA, Trucks, Rail
+
+Tick-based simulation via SimClock
+
+Central state shared between all components
+
+Clients connect via WebSocket, receive structured JSON messages
+
+📦 CPL Logic
+
+Creates synthetic coils via fakerCoil
+
+3 physical deposits (this.deposits), 1 transfer car (this.transferCar)
+
+New coils generated every rate ticks if not blocked
+
+Downtime tracked if transfer car is blocked:
+
+Logs when downtime starts and resumes
+
+Tracks downtimeTicks and cumulative totalDowntime
+
+🪪 Coil Injection & MES
+
+58% chance to be marked ON_HOLD
+
+Simulated MES XML built using xmlbuilder2
+
+MES XML sent to WebSocket clients as mes_data 5 ticks before coil enters deposit
+
+📤 CPL Exit Messages
+
+Built using fixed-format string to match production TCP message spec
+
+Sent every 5 ticks
+
+Format matches:
+
+*YYYY.MM.DD HH:MM:SS;00901;0000;CPL  ;TWMS Data:<6 segments>#
+
+Each segment (per deposit) includes:
+
+MATERIAL_ID (15 char, right padded)
+
+WEIGHT (5 digits, left padded with 0)
+
+WIDTH (4 digits, left padded with 0)
+
+OUTSIDE_DIAMETER (4 digits, left padded)
+
+DEPOSIT number (00100, 00200, etc)
+
+🗑️ Coil Removal
+
+WebSocket message: { type: 'remove_coil', payload: '<MATERIAL_ID>' }
+
+Server calls handleRemoval to free deposit
+
+LIFO removal is preferred but any order is supported
+
+✅ Node-RED Setup
+
+Use websocket in to receive cpl_exit_message
+
+Parse and format into TCP message
+
+Send to TWMS or TCP debug listener
+
+🧠 Next Steps
+
+Node-RED Setup:
+
+WebSocket in node: ws://localhost:3000
+
+Parse cpl_exit_message and forward via TCP as raw string
+
+Removal Logic:
+
+Send remove_coil WebSocket message with MATERIAL_ID
+
+Server uses handleRemoval() to free deposit
+
+SLH, ANBA, Trucks, Rail:
+
+Model their logic similar to CPL
+
+Add entry/exit simulation, rules, and removal triggers
+
+Microservice for Oracle Insert:
+
+Python Flask-based insert/query API (optional)
+
+Client Dashboard:
+
+Track coils, exits, downtime
+
+Visualize MES flow and deposit status
+

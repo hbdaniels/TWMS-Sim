@@ -1,0 +1,21 @@
+{
+  "name": "twmssim",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "dotenv": "^17.0.1",
+    "oracledb": "^6.8.0",
+    "ws": "^8.18.3",
+    "xmlbuilder2": "^3.1.1"
+  }
+}
