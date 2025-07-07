@@ -44,7 +44,7 @@ export async function insertMesData(coil) {
   }
 }
 
-export async function insertDispatchData(dispatch) {
+export async function insertDispatchData(dispatchXML) {
     try {
       const conn = await getConnection(); // ✅ Use the new connection method
   
@@ -57,7 +57,7 @@ export async function insertDispatchData(dispatch) {
         {
           message_no: '2004',
           status: 0,
-          xml_data: dispatch.xml,
+          xml_data: dispatchXML,
           priority: 50,
           remark: 'TWMS-SIM MaterialForDispatch',
         },
@@ -72,3 +72,4 @@ export async function insertDispatchData(dispatch) {
     }
   }
   
+      

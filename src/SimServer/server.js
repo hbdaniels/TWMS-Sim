@@ -24,7 +24,7 @@ import { generateMaterialForDispatch } from './sim/utils/fakerDispatch.js';
 const dispatch = generateMaterialForDispatch({
     MATERIALS: [
       {
-        material_id: '2104457270'  // Only this is required
+        MATERIAL_ID: '2104457270'  // Only this is required
       }
     ]
   });
@@ -46,9 +46,11 @@ const cpl = new CPL({
         internal_steelgrade: 'DX54D',
         customer_application_text: 'AUTOMOTIVE INC.',
         transport_mode: 'TRUCK_EXTERNAL',
-        succesive_plant_code: "PACK",
+        successive_plant_code: "PACK",
+        previous_plant_code: "CPL",
         on_hold: 'N',
-        prod_group: 'HRP'
+        prod_group: 'HRP',
+        scrap_index: 'N',
       }
       
   });

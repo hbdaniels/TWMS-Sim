@@ -3,8 +3,8 @@ import { faker } from '@faker-js/faker';
 
 export function generateMaterialForDispatch(overrides = {}) {
   const materials = overrides.MATERIALS || [];
-  if (!materials.length || !materials[0].material_id) {
-    throw new Error("material_id is required in MATERIALS[0]");
+  if (!materials.length || !materials[0].MATERIAL_ID) {
+    throw new Error("MATERIAL_ID is required in MATERIALS[0]");
   }
 
   return {
@@ -23,7 +23,7 @@ export function generateMaterialForDispatch(overrides = {}) {
     MATERIALS: materials.map((m) => ({
       SAP_MATERIAL_CODE: m.sap_material_code || faker.string.numeric(12),
       SELECT: m.select || '1',
-      MATERIAL_ID: m.material_id,
+      MATERIAL_ID: m.MATERIAL_ID,
       COUNT: m.count || '1',
       MES_QUALITY_STATUS: m.mes_quality_status || 'R',
       SAP_RTS: m.sap_rts || 'Y',
@@ -32,4 +32,13 @@ export function generateMaterialForDispatch(overrides = {}) {
       INSTRUCTION: m.instruction || 'No Restrictions'
     }))
   };
+}
+
+export function createFakeShippingOrderNumber(){
+    return faker.string.numeric(10);
+}
+
+
+export function createFakeTruckName(){
+    return "SIM_TRUCK-" + faker.string.alphanumeric(6);
 }

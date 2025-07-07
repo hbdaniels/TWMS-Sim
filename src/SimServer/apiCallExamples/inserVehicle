@@ -1,0 +1,68 @@
+  {
+    "VehicleID": "TRK67",
+    "ShippingOrderNumber": "3463958041",
+    "Description": "Truck external, ",
+    "IsExtern": true,
+    "Type": "TRUCK",
+    "LoadingMode": "UNKNOWN",
+    "ShippingDueDate": "",
+    "ShippingWeight": 0,
+    "LoadPlanned": [
+        {
+            m_MaterialID: '2104467160',
+            m_VehicleLocation: '',     // can be anything
+            m_OrderKey: 1,
+            m_TrayCoord: 0,
+        }
+    ],
+  }
+
+  {
+    "VehicleID": "TRK68",
+    "ShippingOrderNumber": "0008932982",
+    "Description": "Truck external, ",
+    "IsExtern": true,
+    "Type": "TRUCK",
+    "LoadingMode": "UNKNOWN",
+    "ShippingDueDate": "",
+    "ShippingWeight": 0,
+    "LoadPlanned": [
+        {
+            m_MaterialID: '0008932982',
+            m_VehicleLocation: '',     // can be anything
+            m_OrderKey: 1,
+            m_TrayCoord: 0,
+        }
+    ],
+  }
+
+  {
+    "VehicleID": "TRK68",
+    "ShippingOrderNumber": "0008932982",
+    "Description": "Truck external",
+    "IsExtern": true,
+    "Type": "TRUCK",
+    "LoadingMode": "UNKNOWN",
+    "ShippingDueDate": "2025-07-10T00:00:00",
+    "ShippingWeight": 0,
+    "LoadPlanned": [
+      {
+        "m_MaterialID": "2104465400",
+        "m_VehicleLocation": "",
+        "m_OrderKey": 1,
+        "m_TrayCoord": 0
+      }
+    ],
+    "VehicleType": {
+      "m_TypeName": "EXT_TRUCK_TRK68",
+      "m_Length": 13000,
+      "m_Width": 2500,
+      "m_MaxWeight": 40000,
+      "m_MaxCoilCount": 4,
+      "m_MinCoilCount": 1,
+      "m_CoilSpacing": 200,
+      "m_VehicleBaseType": "TRUCK",
+      "m_Locations": []
+    }
+  }
+  
