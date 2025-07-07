@@ -1,3 +1,4 @@
+  {"test":
   {
     "VehicleID": "TRK67",
     "ShippingOrderNumber": "3463958041",
@@ -9,12 +10,11 @@
     "ShippingWeight": 0,
     "LoadPlanned": [
         {
-            m_MaterialID: '2104467160',
-            m_VehicleLocation: '',     // can be anything
-            m_OrderKey: 1,
-            m_TrayCoord: 0,
+            "m_MaterialID": "2104467160",
+            "m_VehicleLocation": "",
+            "m_TrayCoord": 0
         }
-    ],
+    ]
   }
 
   {
@@ -28,13 +28,13 @@
     "ShippingWeight": 0,
     "LoadPlanned": [
         {
-            m_MaterialID: '0008932982',
-            m_VehicleLocation: '',     // can be anything
-            m_OrderKey: 1,
-            m_TrayCoord: 0,
+            "m_MaterialID": "0008932982",
+            "m_VehicleLocation": "",     // can be anything
+            "m_OrderKey": 1,
+            "m_TrayCoord": 0,
         }
     ],
-  }
+  },
 
   {
     "VehicleID": "TRK68",
@@ -65,4 +65,4 @@
       "m_Locations": []
     }
   }
-  
+}
