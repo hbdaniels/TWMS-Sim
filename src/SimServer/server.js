@@ -52,7 +52,13 @@ const trucks = new Trucks({
 
 //const trucks = new Trucks({ rate: 10 });
 const rail = new Rail({ rate: 12 });
-const packagingManager = new PackagingManager({ holdTickRate: 5, packingStageTickRate: 10 });
+const packagingManager = new PackagingManager({
+    holdTickRate: 5,
+    packingStageTickRate: 10
+  });
+  
+  await packagingManager.init(); // <-- This is REQUIRED
+  
 
 simClock.addComponent(cpl);
 simClock.addComponent(slh);
