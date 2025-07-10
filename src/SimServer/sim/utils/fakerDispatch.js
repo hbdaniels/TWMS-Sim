@@ -42,3 +42,6 @@ export function createFakeShippingOrderNumber(){
 export function createFakeTruckName(){
     return "SIM_TRUCK-" + faker.string.alphanumeric(6);
 }
+export function createFakeRailcarName(){
+    return "SIM_WAGON-" + faker.string.alphanumeric(6);
+}

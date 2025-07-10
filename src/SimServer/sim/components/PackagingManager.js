@@ -26,7 +26,7 @@ export class PackagingManager {
     this._coilMasterUpdated = 0;
 
     this.axios = axios.create({
-      baseURL: 'https://localhost:44378/api/vehicle',
+      baseURL: 'https://localhost:44378/api',
       httpsAgent: new https.Agent({ rejectUnauthorized: false })
     });
   }

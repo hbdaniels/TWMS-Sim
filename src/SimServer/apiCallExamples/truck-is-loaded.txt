@@ -1,0 +1,3 @@
+{
+  "VehicleId": "SIM_TRUCK-012FOm"
+}

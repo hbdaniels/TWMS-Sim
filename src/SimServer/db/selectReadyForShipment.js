@@ -73,7 +73,46 @@ export async function getCoilsWithShippingOrderNumber() {
       shippingOrderNumber: row.SHIPPINGORDERNUMBER
     }));
   }
-  
 
+  export async function getTrucksThatNeedRegistration() {
+    const conn = await getConnection();
+  
+    const result = await conn.execute(
+      `
+      SELECT * FROM VEHICLE WHERE VTYPE='T' AND SHIPPINGORDERNUMBER IS NOT NULL
+      `,
+      {}, // No bind variables
+      { outFormat: oracledb.OUT_FORMAT_OBJECT } // Options
+    );
+  
+    await conn.close();
+  
+    return result.rows;
+  }
+  
+  export async function getCoilsThatNeedRailcars() {
+    const conn = await getConnection();
+  
+    const result = await conn.execute(
+      `
+      SELECT w.material_id, c.shippingordernumber
+      FROM wob_data w
+      JOIN coil_data c ON w.wob_id = c.wob_id
+      LEFT JOIN vehicle v ON c.shippingordernumber = v.shippingordernumber
+      WHERE (c.shippingordernumber IS NOT NULL AND c.TRANSPORT_MODE_ORDER = 'RAILCAR' AND c.TRANSPORT_MODE != 'TRUCK_EXTERNAL')
+        AND v.shippingordernumber IS NULL
+      `,
+      {},
+      { outFormat: oracledb.OUT_FORMAT_OBJECT }
+    );
+  
+    await conn.close();
+  
+    return result.rows.map(row => ({
+      materialId: row.MATERIAL_ID,
+      shippingOrderNumber: row.SHIPPINGORDERNUMBER
+    }));
+  }
+  
 
   

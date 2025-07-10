@@ -23,29 +23,6 @@ export class Trucks {
       console.log('📥 Building out fake shipments...');
       this.shipmentManager.buildOutFakeTruckShipment();
       
-    //   if (!this.ready || this.queue.length === 0) {
-    //     console.log('📥 Querying TWMS for coils ready to ship...');
-    //     this.queue = await getReadyToShipCoils(10);
-    //     this.ready = true;
-    //   }
-
-    //   const material_id = this.queue.shift();
-    //   if (!material_id) return;
-
-    //   const dispatch = generateTruckMaterialForDispatch({
-    //     TRANSPORT_MODE: '01', // TRUCK_EXTERNAL
-    //     MATERIALS: [{ material_id }]
-    //   });
-
-    //   const xml = buildMESDispatchXML(dispatch);
-    //   console.log(xml); 
-
-    //   await insertDispatchData({
-    //     xml,
-    //     material_id
-    //   });
-
-    //   console.log(`🚚 Sent MaterialForDispatch for coil ${material_id}`);
     }
   }
 }

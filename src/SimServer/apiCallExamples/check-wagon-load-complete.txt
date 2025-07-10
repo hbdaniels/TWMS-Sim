@@ -1,0 +1,4 @@
+{
+  "VehicleId": "WGN1234",
+  "IsFullyLoaded": true
+}

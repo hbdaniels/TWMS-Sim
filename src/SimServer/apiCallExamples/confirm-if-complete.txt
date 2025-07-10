@@ -1,0 +1,4 @@
+
+{
+  "VehicleId": "WAGON1234"
+}

@@ -1,15 +1,20 @@
-// sim/components/Rail.js
 export class Rail {
-    constructor({ rate = 1 }) {
+    constructor({ rate = 20 }) {
       this.rate = rate;
       this.counter = 0;
+      this.queue = [];
+      this.ready = false;
+      this.shipmentManager = new ShipmentManager();
     }
   
-    tick(state) {
+    async tick() {
       this.counter++;
+  
       if (this.counter >= this.rate) {
         this.counter = 0;
-        console.log(`🚆 Simulating rail car pickup event`);
+        console.log('🚆 Building railcars for coils with shipments...');
+        await this.shipmentManager.buildRailcarsForCoilsWithShipments();
       }
     }
   }
+  

@@ -1,0 +1,10 @@
+{
+  "MainArea": "SST2",
+  "Bay": "ST21",
+  "Row": "R1",
+  "VehicleId": "WGN1234",
+  "WagonTypeId": 3, //or 8 for black
+  "Position": 6,
+  "UseDefaultType": false
+}
+
