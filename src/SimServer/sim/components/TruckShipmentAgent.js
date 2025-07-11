@@ -5,7 +5,7 @@ import { buildMESDispatchXML } from "../utils/buildMESDispatchXML.js";
 import { buildTruckPayloadXML } from "../utils/buildTruckPayloadXML.js";
 import { apiManager } from "../../api/apiManager.js";
 
-export class TruckShipmentManager {
+export class TruckShipmentAgent {
   constructor(bay) {
     this.loadingStations = [
       {
@@ -74,10 +74,10 @@ export class TruckShipmentManager {
       shipment.truckName = truckName;
       return shipment;
     });
-
+    console.log("🚚 Truck shipments to be created:", shipmentList);
     for (const shipment of shipmentList) {
       const { truckName, shippingOrderNumber, materials } = shipment;
-
+      console.log("creating material for dispatch", truckName, shippingOrderNumber, materials);
       const dispatch = generateMaterialForDispatch({
         SHIPPING_ORDER_NUMBER: shippingOrderNumber,
         SHIPMENT_PRIORITY: "1",

@@ -2,7 +2,7 @@ import { getCoilsThatNeedRailcars } from "../../db/selectReadyForShipment.js";
 import { createFakeRailcarName } from "../utils/fakerDispatch.js";
 import { apiManager } from "../../api/apiManager.js";
 
-export class RailShipmentManager {
+export class RailShipmentAgent {
     constructor(bay){
         this.bay = bay;
         this.apiManager = new apiManager();

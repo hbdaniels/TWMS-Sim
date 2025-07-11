@@ -21,10 +21,17 @@ export function generateCoil(overrides = {}) {
     'APPLIANCE EXPOSED', 'PIPE TUBE STRUCTURAL', 'APPLIANCE SEMI EXPOSED', 'BRACKET',
     'AUTO UNEXPOSED SAFETY PART', 'LASER BURNEDFABRICATED PARTS'
   ];
+  const stateAbbrs = [
+    'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA',
+    'KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
+    'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
+    'VA','WA','WV','WI','WY'
+  ];
+  
 
   return {
     TWMS_REQ_ID: overrides.twms_req_id || '',
-    MATERIAL_ID: overrides.material_id || prefix + faker.string.numeric(10),
+    MATERIAL_ID: overrides.material_id || prefix + faker.string.numeric(7),
     FOREIGN_ID: overrides.foreign_id || faker.string.alphanumeric(10),
     RFID_ID: overrides.rfid_id || faker.string.alphanumeric(17),
     MAT_TYPE: overrides.mat_type || faker.number.int({ min: 2, max: 3 }),
@@ -66,6 +73,7 @@ export function generateCoil(overrides = {}) {
     SUCCESIVE_PLANT_CODE: overrides.successive_plant_code || faker.helpers.arrayElement(successivePlantCodes),
     EST_PROD_DATE: overrides.est_prod_date || new Date().toISOString(),
     PIECE_STATUS: overrides.piece_status || '',
+    TRANSPORT_MODE: overrides.transport_mode || faker.helpers.arrayElement(['01', '02', '03']), // '01' = TRUCK_EXTERNAL, '02' = RAILCAR, '03' = BARGE_INCOMING
     ON_HOLD: overrides.on_hold || faker.helpers.arrayElement(['Y', 'N']),
     ON_HOLD_REASON: overrides.on_hold_reason || faker.lorem.sentence().slice(0, 256),
     PACKAGING_TYPE: overrides.packaging_type || faker.helpers.arrayElement(packagingTypes),
@@ -73,6 +81,22 @@ export function generateCoil(overrides = {}) {
     GROSS_WEIGHT: overrides.gross_weight || 0,
     MATERIAL_TYPE: overrides.material_type || faker.number.int({ min: 0, max: 1 }),
     CUSTOMER_BRIEF_DESIGNATION: overrides.customer_brief_designation || faker.helpers.arrayElement(customerBriefDesignations),
-    CUSTOMER_APPLICATION_TEXT: overrides.customer_application_text || faker.helpers.arrayElement(customerApplicationTexts)
+    CUSTOMER_APPLICATION_TEXT: overrides.customer_application_text || faker.helpers.arrayElement(customerApplicationTexts),
+    //Sales data
+    SALES_DATA: {
+        NUMBER_OF_CUSTOMER: overrides.sales_data?.number_of_customer || faker.string.numeric(10).padStart(10, '0'),
+        CUSTOMER_TEXT: overrides.sales_data?.customer_text || faker.company.name(),
+        DELIVERY_ADDRESS: overrides.sales_data?.delivery_address || `${faker.location.streetAddress()},${faker.location.zipCode()},${faker.location.city()},${faker.helpers.arrayElement(stateAbbrs)}`,
+        GRADE_GROUP: overrides.sales_data?.grade_group || '',
+        CUSTOMER_FINAL: overrides.sales_data?.customer_final || faker.company.name().split(' ')[0],
+        SALES_ORDER_NUMBER: overrides.sales_data?.sales_order_number || faker.string.numeric(14),
+        DELIVERY_ORDER_NUMBER: overrides.sales_data?.delivery_order_number || faker.string.numeric(6),
+        MATERIAL_DESCRIPTION: overrides.sales_data?.material_description || '',
+        VENDOR_CODE: overrides.sales_data?.vendor_code || '',
+        EXPEDITE_ORDER: overrides.sales_data?.expedite_order ?? faker.helpers.arrayElement(['0', '1']),
+        RELEASE_DATE: overrides.sales_data?.release_date || '',
+        GRINDING_REQUIRED: overrides.sales_data?.grinding_required || ''
+      },
+  
   };
 }

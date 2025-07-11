@@ -18,32 +18,32 @@ const coilProvider = createCoilQueueProvider({ batchSize: 10 });
 
 
 
-const cpl = new CPL({
-    rate: 5,
-    socketServer: wss,
-    messageInterval: 10,     // every 10 ticks
-    createInterval: 10,      // one coil every 2 (120) minutes (if tick = 1s)
-    campaign: {
-        count: 4,
-        prefix: 'HD',
-        //mat_type: 1001,
-        width: 1220,
-        weight: 22500,
-        outside_diameter: 1800,
-        internal_steelgrade: 'DX54D',
-        customer_application_text: 'AUTOMOTIVE INC.',
-        transport_mode: 'TRUCK_EXTERNAL',
-        successive_plant_code: "PACK",
-        previous_plant_code: "CPL",
-        on_hold: 'N',
-        prod_group: 'HRP',
-        scrap_index: 'N',
-      }
+// const cpl = new CPL({
+//     rate: 5,
+//     socketServer: wss,
+//     messageInterval: 10,     // every 10 ticks
+//     createInterval: 10,      // one coil every 2 (120) minutes (if tick = 1s)
+//     campaign: {
+//         count: 20,
+//         prefix: 'HD',
+//         //mat_type: 1001,
+//         width: 1220,
+//         weight: 22500,
+//         outside_diameter: 1800,
+//         internal_steelgrade: 'DX54D',
+//         customer_application_text: 'AUTOMOTIVE INC.',
+//         transport_mode: 'TRUCK_EXTERNAL',
+//         successive_plant_code: "PACK",
+//         previous_plant_code: "CPL",
+//         on_hold: 'N',
+//         prod_group: 'HRP',
+//         scrap_index: 'N',
+//       }
       
-  });
+//   });
   
-const slh = new SLH({ rate: 4 });
-const anba = new ANBA({ rate: 6 });
+// const slh = new SLH({ rate: 4 });
+// const anba = new ANBA({ rate: 6 });
 const trucks = new Trucks({
     rate: 10,
     coilProvider,
@@ -51,24 +51,24 @@ const trucks = new Trucks({
   });
 
 //const trucks = new Trucks({ rate: 10 });
-const rail = new Rail({ rate: 12 });
-const packagingManager = new PackagingManager({
-    holdTickRate: 5,
-    packingStageTickRate: 10
-  });
+//const rail = new Rail({ rate: 12 });
+// const packagingManager = new PackagingManager({
+//     holdTickRate: 5,
+//     packingStageTickRate: 10
+//   });
   
-  await packagingManager.init(); // <-- This is REQUIRED
+//   await packagingManager.init(); // <-- This is REQUIRED
   
 
-simClock.addComponent(cpl);
-simClock.addComponent(slh);
-simClock.addComponent(anba);
+// simClock.addComponent(cpl);
+// simClock.addComponent(slh);
+// simClock.addComponent(anba);
 simClock.addComponent(trucks);
-simClock.addComponent(rail);
-simClock.addComponent(packagingManager);
+//simClock.addComponent(rail);
+// simClock.addComponent(packagingManager);
 simClock.start();
 
-console.log('🧠 TWMS-SIM WebSocket server running on ws://localhost:3000');
+console.log('🧠 TWMS-SIM WebSocket server running on ws://localhost:3001');
 
 wss.on('connection', (ws) => {
   console.log('🔌 Client connected');
