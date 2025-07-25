@@ -101,11 +101,11 @@ export class PackagingAgent {
 
         let stage = 'PrepackingDone';
         let flagUpdatePlantCodes = false;
-
+        console.log(`📦 Deciding stage for ${coil.MATERIAL_ID} at ${loc} Scrap Index = ${coil.SCRAP_INDEX}`);
         if (coil.PACKINGSTAGE === 'C') {
           stage = 'BargePackagingDone';
           flagUpdatePlantCodes = true;
-        } else if (coil.SUCCESIVE_PLANT_CODE === 'ANBA') {
+        } else if (coil.SUCCESIVE_PLANT_CODE === 'ANBA' || coil.SCRAP_INDEX === 'Y') {
           stage = 'BandingDone';
         }
 

@@ -30,7 +30,7 @@ export async function getCoilsAtPackagingOrCM() {
         `
         SELECT 
             w.*, 
-            c.PACKINGSTAGE, c.SUCCESIVE_PLANT_CODE, c.TRANSPORT_MODE_ORDER
+            c.PACKINGSTAGE, c.SUCCESIVE_PLANT_CODE, c.TRANSPORT_MODE_ORDER, c.SCRAP_INDEX, c.ON_HOLD
         FROM 
             wob_data w
         JOIN 

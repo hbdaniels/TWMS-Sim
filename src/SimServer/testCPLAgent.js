@@ -4,7 +4,7 @@ import { SimClock } from './sim/SimClock.js'; // <-- your production SimClock
 import { CPLAgent } from './sim/components/CPLAgent.js';
 
 (async () => {
-  // 🧠 Setup WebSocket server (simulates Node-RED or other clients)
+  //Setup WebSocket server (simulates Node-RED or other clients)
   const wss = new WebSocketServer({ port: 3000 });
 
   wss.on('connection', (ws) => {
@@ -20,14 +20,14 @@ import { CPLAgent } from './sim/components/CPLAgent.js';
       
   });
 
-  // 🧠 Create CPLAgent with a short campaign
+  //Create CPLAgent with a short campaign
   const cplAgent = new CPLAgent({
     campaign: {
-      count: 1000,
+      count: 100,
       prefix: 'SIM',
       width: 1000,
       weight: 19000,
-      outside_diameter: 1600,
+      //outside_diameter: 1600,
       internal_steelgrade: 'DX52D',
       customer_application_text: 'TEST COILS INC.',
       transport_mode: '02', //01= Truck, 02=Rail, 03=Barge
@@ -40,7 +40,7 @@ import { CPLAgent } from './sim/components/CPLAgent.js';
       scrap_index: 'N',
       forceTick: () => cplAgent.tick({}),
     },
-    createInterval: 3,
+    createInterval: 5,
     socketServer: wss,
     
   });

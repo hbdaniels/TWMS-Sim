@@ -1,9 +1,10 @@
-import { getCoilsThatNeedTrucks, getTrucksThatNeedRegistration } from "../../db/selectReadyForShipment.js";
+import { getCoilsThatNeedDispatch, getCoilsThatNeedTrucks, getTrucksThatNeedRegistration } from "../../db/selectReadyForShipment.js";
 import { insertDispatchData } from "../../db/insertMesData.js";
 import { createFakeShippingOrderNumber, createFakeTruckName, generateMaterialForDispatch } from "../utils/fakerDispatch.js";
 import { buildMESDispatchXML } from "../utils/buildMESDispatchXML.js";
 import { buildTruckPayloadXML } from "../utils/buildTruckPayloadXML.js";
 import { apiManager } from "../../api/apiManager.js";
+import { chunkArray } from "../utils/chunkArrray.js";
 
 export class TruckShipmentAgent {
   constructor(bay) {
@@ -127,7 +128,7 @@ export class TruckShipmentAgent {
     console.log("🚛 Inserted or recovered trucks for shipments:", this.pendingTrucks);
   }
 
-  startPollingTruckRegistration(intervalMs = 5000) {
+  startPollingTruckRegistration(intervalMs = 15000) {
     const isTruckBayAvailable = () => {
       for (const station of this.loadingStations) {
         const isOccupied = this.registeredTrucks.some(
@@ -191,4 +192,34 @@ export class TruckShipmentAgent {
       }, intervalMs);
       
   }
+
+  async generateDispatchForTruckCoils() {
+    const coils = await getCoilsThatNeedDispatch();
+    console.log("Coils: ", coils);
+    if (!coils.length) {
+      console.log("📭 No coils found that need dispatch creation.");
+      return;
+    }
+  
+    const batches = chunkArray(coils, 1, 2);
+  
+    for (const batch of batches) {
+      const shippingOrderNumber = createFakeShippingOrderNumber();
+      const materialIds = batch.map(c => c.MATERIAL_ID);
+  
+      console.log("📝 Creating dispatch:", shippingOrderNumber, materialIds);
+  
+      const dispatch = generateMaterialForDispatch({
+        SHIPPING_ORDER_NUMBER: shippingOrderNumber,
+        SHIPMENT_PRIORITY: "1",
+        TRANSPORT_MODE: "01",
+        SAP_MATERIAL_CODE: "000000000001",
+        MATERIALS: materialIds.map(id => ({ MATERIAL_ID: id, COUNT: "1" }))
+      });
+  
+      const dispatchXML = buildMESDispatchXML(dispatch);
+      await insertDispatchData(dispatchXML);
+    }
+  }
+
 }

@@ -4,20 +4,17 @@
 import oracledb from 'oracledb';
 import { getConnection } from './connection.js';
 
-export async function getCoilsThatNeedShipment() {
+export async function getCoilsThatNeedDispatch() {
   const conn = await getConnection();
 
   const result = await conn.execute(
     `
-    SELECT material_id
-    FROM wob_data
-    WHERE wob_id IN (
-      SELECT wob_id
-      FROM coil_data
-      WHERE transport_mode_order = 'TRUCK_EXTERNAL'
-      AND PACKINGSTAGE = 'C'
-      AND SHIPPINGORDERNUMBER IS NULL
-    )
+    SELECT w.MATERIAL_ID, c.*
+    FROM COIL_DATA c
+    JOIN WOB_DATA w ON c.WOB_ID = w.WOB_ID
+    WHERE c.TRANSPORT_MODE_ORDER = 'TRUCK_EXTERNAL'
+        AND c.SHIPPINGORDERNUMBER IS NULL
+        AND c.PACKINGSTAGE = 'C' 
     `,
     {}, // No bind variables
     { outFormat: oracledb.OUT_FORMAT_OBJECT } // Options
@@ -25,8 +22,9 @@ export async function getCoilsThatNeedShipment() {
 
   await conn.close();
 
-  return result.rows.map(row => row.MATERIAL_ID);
+  return result.rows;
 }
+
 
 export async function getCoilsWithShippingOrderNumber() {
     const conn = await getConnection();

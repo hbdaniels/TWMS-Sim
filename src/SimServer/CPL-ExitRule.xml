@@ -1,0 +1,46 @@
+<Rules>
+    <Element>
+        <Enabled>true</Enabled>
+        <Condition>Order.Rulename=='CPL-Exit'</Condition>
+        <Then>
+            <Element>
+                <Enabled>true</Enabled>
+                <Comment>Reduce Evaluation Targets to just the 15 packing deposits</Comment>
+                <Condition>Row=='PAC'</Condition>
+                <Then>
+                    <Element>
+                        <Enabled>true</Enabled>
+                        <Condition>Coil.@ST21_ANBA_State0</Condition>
+                        <Then>
+                            <Element>
+                                <Enabled>true</Enabled>
+                                <Condition>Row=='PAC' &amp;&amp; Location &lt; 6
+                                </Condition>
+                                <Then>
+                                    <Element>
+                                        <Enabled>true</Enabled>
+                                        <Action>1001 - Location</Action>
+                                        <RestrictionType>NONE</RestrictionType>
+                                    </Element>
+                                </Then>
+                                <Else>
+                                    <Element>
+                                        <Enabled>true</Enabled>
+                                        <Restriction>ANBA Coil should not go here</Restriction>
+                                        <RestrictionType>WEAK</RestrictionType>
+                                    </Element>
+                                </Else>
+                                <RestrictionType>NONE</RestrictionType>
+                            </Element>
+                        </Then>
+                        <Else />
+                        <RestrictionType>NONE</RestrictionType>
+                    </Element>
+                </Then>
+                <Else />
+                <RestrictionType>NONE</RestrictionType>
+            </Element>
+        </Then>
+        <Else />
+        <RestrictionType>NONE</RestrictionType>
+    </Element></Rules>

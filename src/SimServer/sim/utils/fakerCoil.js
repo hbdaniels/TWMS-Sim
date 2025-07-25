@@ -45,7 +45,7 @@ export function generateCoil(overrides = {}) {
     LENGTH: overrides.length || faker.number.int({ min: 100, max: 650 }),
     WIDTH: overrides.width || faker.number.int({ min: 919, max: 1600 }),
     INSIDE_DIAMETER: overrides.inside_diameter || faker.helpers.arrayElement(['610', '760']),
-    OUTSIDE_DIAMETER: overrides.outside_diameter || faker.number.int({ min: 1000, max: 2000 }),
+    OUTSIDE_DIAMETER: overrides.outside_diameter || faker.number.int({ min: 1350, max: 1750 }),
     TRANSFER_BAR_INDEX: overrides.transfer_bar_index || faker.helpers.arrayElement(['Y', 'N']),
     SCRAP_INDEX: overrides.scrap_index || faker.helpers.arrayElement(['Y', 'N']),
     TRANSITION_COIL_INDEX: overrides.transition_coil_index || faker.helpers.arrayElement(['Y', 'N']),
